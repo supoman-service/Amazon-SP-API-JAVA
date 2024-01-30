@@ -58,7 +58,9 @@ SP-API(amazon selling partner api):
 }
 ```
 reportApiTest
-![image](https://github.com/supoman-service/Amazon-SP-Api-JAVA/assets/20614254/5a222e67-1116-4b21-9da9-6a7bcc51fdfa)
+![image](https://github.com/supoman-service/Amazon-SP-API-JAVA/assets/20614254/58636c6c-f521-4156-be21-0657746d0bc5)
+
 
 # 交流
-![image](https://github.com/supoman-service/Amazon-SP-Api-JAVA/assets/20614254/b1ecd520-40d7-41bc-ab85-a37e00d278ad)
+![image](https://github.com/supoman-service/Amazon-SP-API-JAVA/assets/20614254/edf2bf77-716a-4ae4-9f11-672512e3d53d)
+
