@@ -157,7 +157,7 @@ String feedDate="<?xml version=\"1.0\" encoding=\"utf-8\" ?>\n"
 
     @Test
     public void uploadPackFile() throws IOException, ApiException {
-        var inputStream=new FileInputStream("D:\\Soft\\Tencent\\QiDianDocument\\2885018758\\FileRecv\\Flat.File.OrderCancellation._TTH_-DWUS.xls");
+        var inputStream=new FileInputStream("D:\\Flat.File.OrderCancellation._TTH_-DWUS.xls");
         var bytes=toByteArray(inputStream);
         createFeedDocumentTest(bytes,"POST_FLAT_FILE_ORDER_ACKNOWLEDGEMENT_DATA");
      //   createFeedDocumentTest(inputStream,"POST_FLAT_FILE_ORDER_ACKNOWLEDGEMENT_DATA");
@@ -169,7 +169,7 @@ String feedDate="<?xml version=\"1.0\" encoding=\"utf-8\" ?>\n"
     * @date 2023/4/13
     */
     @Test
-    public void uploadPackFile2() throws IOException, ApiException {
+    public void uploadListing() throws IOException, ApiException {
         var inputStream=new FileInputStream("D:\\AdsReport\\Schrank-Unterbauleuchten.xlsm");
         var bytes=toByteArray(inputStream);
         createFeedDocumentTest(bytes,"POST_FLAT_FILE_LISTINGS_DATA");
