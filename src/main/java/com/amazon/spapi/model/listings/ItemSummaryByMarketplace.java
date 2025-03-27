@@ -1,6 +1,6 @@
 /*
  * Selling Partner API for Listings Items
- * The Selling Partner API for Listings Items (Listings Items API) provides programmatic access to selling partner listings on Amazon. Use this API in collaboration with the Selling Partner API for Product Type Definitions, which you use to retrieve the information about Amazon product types needed to use the Listings Items API.  For more information, see the [Listings Items API Use Case Guide](doc:listings-items-api-v2021-08-01-use-case-guide).
+ * The Selling Partner API for Listings Items (Listings Items API) provides programmatic access to selling partner listings on Amazon. Use this API in collaboration with the Selling Partner API for Product Type Definitions, which you use to retrieve the information about Amazon product types needed to use the Listings Items API.  For more information, see the [Listings Items API Use Case Guide](https://developer-docs.amazon.com/sp-api/docs/listings-items-api-v2021-08-01-use-case-guide).
  *
  * OpenAPI spec version: 2021-08-01
  *
@@ -20,6 +20,7 @@ import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+import com.amazon.spapi.model.listings.ItemImage;
 import org.threeten.bp.OffsetDateTime;
 
 import java.io.IOException;
@@ -31,7 +32,7 @@ import java.util.Objects;
  * Summary details of a listings item for an Amazon marketplace.
  */
 @ApiModel(description = "Summary details of a listings item for an Amazon marketplace.")
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2023-05-12T16:19:42.940+08:00")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2024-12-19T17:08:06.914+08:00")
 public class ItemSummaryByMarketplace {
   @SerializedName("marketplaceId")
   private String marketplaceId = null;
@@ -206,7 +207,7 @@ public class ItemSummaryByMarketplace {
    * Amazon Standard Identification Number (ASIN) of the listings item.
    * @return asin
   **/
-  @ApiModelProperty(required = true, value = "Amazon Standard Identification Number (ASIN) of the listings item.")
+  @ApiModelProperty(value = "Amazon Standard Identification Number (ASIN) of the listings item.")
   public String getAsin() {
     return asin;
   }
@@ -280,10 +281,10 @@ public class ItemSummaryByMarketplace {
   }
 
    /**
-   * Fulfillment network stock keeping unit is an identifier used by Amazon fulfillment centers to identify each unique item.
+   * The fulfillment network stock keeping unit is an identifier used by Amazon fulfillment centers to identify each unique item.
    * @return fnSku
   **/
-  @ApiModelProperty(value = "Fulfillment network stock keeping unit is an identifier used by Amazon fulfillment centers to identify each unique item.")
+  @ApiModelProperty(value = "The fulfillment network stock keeping unit is an identifier used by Amazon fulfillment centers to identify each unique item.")
   public String getFnSku() {
     return fnSku;
   }
@@ -298,10 +299,10 @@ public class ItemSummaryByMarketplace {
   }
 
    /**
-   * Name, or title, associated with an Amazon catalog item.
+   * The name or title associated with an Amazon catalog item.
    * @return itemName
   **/
-  @ApiModelProperty(required = true, value = "Name, or title, associated with an Amazon catalog item.")
+  @ApiModelProperty(value = "The name or title associated with an Amazon catalog item.")
   public String getItemName() {
     return itemName;
   }
@@ -316,10 +317,10 @@ public class ItemSummaryByMarketplace {
   }
 
    /**
-   * Date the listings item was created, in ISO 8601 format.
+   * The date the listings item was created in ISO 8601 format.
    * @return createdDate
   **/
-  @ApiModelProperty(required = true, value = "Date the listings item was created, in ISO 8601 format.")
+  @ApiModelProperty(required = true, value = "The date the listings item was created in ISO 8601 format.")
   public OffsetDateTime getCreatedDate() {
     return createdDate;
   }
@@ -334,10 +335,10 @@ public class ItemSummaryByMarketplace {
   }
 
    /**
-   * Date the listings item was last updated, in ISO 8601 format.
+   * The date the listings item was last updated in ISO 8601 format.
    * @return lastUpdatedDate
   **/
-  @ApiModelProperty(required = true, value = "Date the listings item was last updated, in ISO 8601 format.")
+  @ApiModelProperty(required = true, value = "The date the listings item was last updated in ISO 8601 format.")
   public OffsetDateTime getLastUpdatedDate() {
     return lastUpdatedDate;
   }
@@ -352,10 +353,10 @@ public class ItemSummaryByMarketplace {
   }
 
    /**
-   * Main image for the listings item.
+   * The main image for the listings item.
    * @return mainImage
   **/
-  @ApiModelProperty(value = "Main image for the listings item.")
+  @ApiModelProperty(value = "The main image for the listings item.")
   public ItemImage getMainImage() {
     return mainImage;
   }

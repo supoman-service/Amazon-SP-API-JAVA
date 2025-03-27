@@ -1,6 +1,6 @@
 /*
  * Selling Partner API for Listings Items
- * The Selling Partner API for Listings Items (Listings Items API) provides programmatic access to selling partner listings on Amazon. Use this API in collaboration with the Selling Partner API for Product Type Definitions, which you use to retrieve the information about Amazon product types needed to use the Listings Items API.  For more information, see the [Listings Items API Use Case Guide](doc:listings-items-api-v2021-08-01-use-case-guide).
+ * The Selling Partner API for Listings Items (Listings Items API) provides programmatic access to selling partner listings on Amazon. Use this API in collaboration with the Selling Partner API for Product Type Definitions, which you use to retrieve the information about Amazon product types needed to use the Listings Items API.  For more information, see the [Listings Items API Use Case Guide](https://developer-docs.amazon.com/sp-api/docs/listings-items-api-v2021-08-01-use-case-guide).
  *
  * OpenAPI spec version: 2021-08-01
  *
@@ -20,6 +20,9 @@ import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+import com.amazon.spapi.model.listings.Audience;
+import com.amazon.spapi.model.listings.Money;
+import com.amazon.spapi.model.listings.Points;
 
 import java.io.IOException;
 import java.util.Objects;
@@ -28,7 +31,7 @@ import java.util.Objects;
  * Offer details of a listings item for an Amazon marketplace.
  */
 @ApiModel(description = "Offer details of a listings item for an Amazon marketplace.")
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2023-05-12T16:19:42.940+08:00")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2024-12-19T17:08:06.914+08:00")
 public class ItemOfferByMarketplace {
   @SerializedName("marketplaceId")
   private String marketplaceId = null;
@@ -89,16 +92,19 @@ public class ItemOfferByMarketplace {
   @SerializedName("points")
   private Points points = null;
 
+  @SerializedName("audience")
+  private Audience audience = null;
+
   public ItemOfferByMarketplace marketplaceId(String marketplaceId) {
     this.marketplaceId = marketplaceId;
     return this;
   }
 
    /**
-   * Amazon marketplace identifier.
+   * The Amazon marketplace identifier.
    * @return marketplaceId
   **/
-  @ApiModelProperty(required = true, value = "Amazon marketplace identifier.")
+  @ApiModelProperty(required = true, value = "The Amazon marketplace identifier.")
   public String getMarketplaceId() {
     return marketplaceId;
   }
@@ -131,10 +137,10 @@ public class ItemOfferByMarketplace {
   }
 
    /**
-   * Purchase price of the listings item
+   * The purchase price of the listings item
    * @return price
   **/
-  @ApiModelProperty(required = true, value = "Purchase price of the listings item")
+  @ApiModelProperty(required = true, value = "The purchase price of the listings item")
   public Money getPrice() {
     return price;
   }
@@ -161,6 +167,24 @@ public class ItemOfferByMarketplace {
     this.points = points;
   }
 
+  public ItemOfferByMarketplace audience(Audience audience) {
+    this.audience = audience;
+    return this;
+  }
+
+   /**
+   * Buyer segment or program this offer is applicable to.
+   * @return audience
+  **/
+  @ApiModelProperty(value = "Buyer segment or program this offer is applicable to.")
+  public Audience getAudience() {
+    return audience;
+  }
+
+  public void setAudience(Audience audience) {
+    this.audience = audience;
+  }
+
 
   @Override
   public boolean equals(Object o) {
@@ -174,12 +198,13 @@ public class ItemOfferByMarketplace {
     return Objects.equals(this.marketplaceId, itemOfferByMarketplace.marketplaceId) &&
         Objects.equals(this.offerType, itemOfferByMarketplace.offerType) &&
         Objects.equals(this.price, itemOfferByMarketplace.price) &&
-        Objects.equals(this.points, itemOfferByMarketplace.points);
+        Objects.equals(this.points, itemOfferByMarketplace.points) &&
+        Objects.equals(this.audience, itemOfferByMarketplace.audience);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(marketplaceId, offerType, price, points);
+    return Objects.hash(marketplaceId, offerType, price, points, audience);
   }
 
 
@@ -192,6 +217,7 @@ public class ItemOfferByMarketplace {
     sb.append("    offerType: ").append(toIndentedString(offerType)).append("\n");
     sb.append("    price: ").append(toIndentedString(price)).append("\n");
     sb.append("    points: ").append(toIndentedString(points)).append("\n");
+    sb.append("    audience: ").append(toIndentedString(audience)).append("\n");
     sb.append("}");
     return sb.toString();
   }

@@ -1,6 +1,6 @@
 /*
  * Selling Partner API for Listings Items
- * The Selling Partner API for Listings Items (Listings Items API) provides programmatic access to selling partner listings on Amazon. Use this API in collaboration with the Selling Partner API for Product Type Definitions, which you use to retrieve the information about Amazon product types needed to use the Listings Items API.  For more information, see the [Listings Items API Use Case Guide](doc:listings-items-api-v2021-08-01-use-case-guide).
+ * The Selling Partner API for Listings Items (Listings Items API) provides programmatic access to selling partner listings on Amazon. Use this API in collaboration with the Selling Partner API for Product Type Definitions, which you use to retrieve the information about Amazon product types needed to use the Listings Items API.  For more information, see the [Listings Items API Use Case Guide](https://developer-docs.amazon.com/sp-api/docs/listings-items-api-v2021-08-01-use-case-guide).
  *
  * OpenAPI spec version: 2021-08-01
  *
@@ -30,10 +30,10 @@ import java.util.Objects;
  * Individual JSON Patch operation for an HTTP PATCH request.
  */
 @ApiModel(description = "Individual JSON Patch operation for an HTTP PATCH request.")
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2023-05-12T16:19:42.940+08:00")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2024-12-19T17:08:06.914+08:00")
 public class PatchOperation {
   /**
-   * Type of JSON Patch operation. Supported JSON Patch operations include add, replace, and delete. See &lt;https://tools.ietf.org/html/rfc6902&gt;.
+   * Type of JSON Patch operation. Supported JSON Patch operations include add, replace, and delete. Refer to [JavaScript Object Notation (JSON) Patch](https://tools.ietf.org/html/rfc6902) for more information.
    */
   @JsonAdapter(OpEnum.Adapter.class)
   public enum OpEnum {
@@ -96,10 +96,10 @@ public class PatchOperation {
   }
 
    /**
-   * Type of JSON Patch operation. Supported JSON Patch operations include add, replace, and delete. See &lt;https://tools.ietf.org/html/rfc6902&gt;.
+   * Type of JSON Patch operation. Supported JSON Patch operations include add, replace, and delete. Refer to [JavaScript Object Notation (JSON) Patch](https://tools.ietf.org/html/rfc6902) for more information.
    * @return op
   **/
-  @ApiModelProperty(required = true, value = "Type of JSON Patch operation. Supported JSON Patch operations include add, replace, and delete. See <https://tools.ietf.org/html/rfc6902>.")
+  @ApiModelProperty(required = true, value = "Type of JSON Patch operation. Supported JSON Patch operations include add, replace, and delete. Refer to [JavaScript Object Notation (JSON) Patch](https://tools.ietf.org/html/rfc6902) for more information.")
   public OpEnum getOp() {
     return op;
   }
@@ -114,10 +114,10 @@ public class PatchOperation {
   }
 
    /**
-   * JSON Pointer path of the element to patch. See &lt;https://tools.ietf.org/html/rfc6902&gt;.
+   * JSON Pointer path of the element to patch. Refer to [JavaScript Object Notation (JSON) Patch](https://tools.ietf.org/html/rfc6902) for more information.
    * @return path
   **/
-  @ApiModelProperty(required = true, value = "JSON Pointer path of the element to patch. See <https://tools.ietf.org/html/rfc6902>.")
+  @ApiModelProperty(required = true, value = "JSON Pointer path of the element to patch. Refer to [JavaScript Object Notation (JSON) Patch](https://tools.ietf.org/html/rfc6902) for more information.")
   public String getPath() {
     return path;
   }

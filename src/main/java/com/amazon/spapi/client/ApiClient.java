@@ -884,12 +884,12 @@ public class ApiClient {
             response = call.execute();
 
             //记录API请求时间戳日志，方便后续开case沟通
-            Map<String,String> logMap=new HashMap<>();
+          /*  Map<String,String> logMap=new HashMap<>();
             logMap.put("url",response.request().urlString());
             logMap.put("x-amzn-RequestId",response.header("x-amzn-RequestId"));
             logMap.put("X-Amz-Date",response.networkResponse().request().header("X-Amz-Date"));
-            log.info(JSONUtil.toJsonStr(logMap));
-
+            log.debug(JSONUtil.toJsonStr(logMap));
+*/
 
             T data = handleResponse(response, returnType);
             return new ApiResponse<T>(response.code(), response.headers().toMultimap(), data);

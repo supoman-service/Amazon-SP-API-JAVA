@@ -1,6 +1,6 @@
 /*
  * Selling Partner API for Listings Items
- * The Selling Partner API for Listings Items (Listings Items API) provides programmatic access to selling partner listings on Amazon. Use this API in collaboration with the Selling Partner API for Product Type Definitions, which you use to retrieve the information about Amazon product types needed to use the Listings Items API.  For more information, see the [Listings Items API Use Case Guide](doc:listings-items-api-v2021-08-01-use-case-guide).
+ * The Selling Partner API for Listings Items (Listings Items API) provides programmatic access to selling partner listings on Amazon. Use this API in collaboration with the Selling Partner API for Product Type Definitions, which you use to retrieve the information about Amazon product types needed to use the Listings Items API.  For more information, see the [Listings Items API Use Case Guide](https://developer-docs.amazon.com/sp-api/docs/listings-items-api-v2021-08-01-use-case-guide).
  *
  * OpenAPI spec version: 2021-08-01
  *
@@ -26,7 +26,7 @@ import java.util.Objects;
  * A listings item.
  */
 @ApiModel(description = "A listings item.")
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2023-05-12T16:19:42.940+08:00")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2024-12-19T17:08:06.914+08:00")
 public class Item {
   @SerializedName("sku")
   private String sku = null;
@@ -34,9 +34,9 @@ public class Item {
   @SerializedName("summaries")
   private ItemSummaries summaries = null;
 
-
   @SerializedName("attributes")
   private Map attributes = null;
+
 
   @SerializedName("issues")
   private ItemIssues issues = null;
@@ -48,7 +48,16 @@ public class Item {
   private List<FulfillmentAvailability> fulfillmentAvailability = null;
 
   @SerializedName("procurement")
-  private ItemProcurement procurement = null;
+  private List<ItemProcurement> procurement = null;
+
+  @SerializedName("relationships")
+  private ItemRelationships relationships = null;
+
+  @SerializedName("productTypes")
+  private ItemProductTypes productTypes = null;
+
+
+
 
   public Item sku(String sku) {
     this.sku = sku;
@@ -154,10 +163,10 @@ public class Item {
   }
 
    /**
-   * Fulfillment availability for the listings item.
+   * The fulfillment availability for the listings item.
    * @return fulfillmentAvailability
   **/
-  @ApiModelProperty(value = "Fulfillment availability for the listings item.")
+  @ApiModelProperty(value = "The fulfillment availability for the listings item.")
   public List<FulfillmentAvailability> getFulfillmentAvailability() {
     return fulfillmentAvailability;
   }
@@ -166,22 +175,66 @@ public class Item {
     this.fulfillmentAvailability = fulfillmentAvailability;
   }
 
-  public Item procurement(ItemProcurement procurement) {
+  public Item procurement(List<ItemProcurement> procurement) {
     this.procurement = procurement;
     return this;
   }
 
+  public Item addProcurementItem(ItemProcurement procurementItem) {
+    if (this.procurement == null) {
+      this.procurement = new ArrayList<ItemProcurement>();
+    }
+    this.procurement.add(procurementItem);
+    return this;
+  }
+
    /**
-   * Get procurement
+   * The vendor procurement information for the listings item.
    * @return procurement
   **/
-  @ApiModelProperty(value = "")
-  public ItemProcurement getProcurement() {
+  @ApiModelProperty(value = "The vendor procurement information for the listings item.")
+  public List<ItemProcurement> getProcurement() {
     return procurement;
   }
 
-  public void setProcurement(ItemProcurement procurement) {
+  public void setProcurement(List<ItemProcurement> procurement) {
     this.procurement = procurement;
+  }
+
+  public Item relationships(ItemRelationships relationships) {
+    this.relationships = relationships;
+    return this;
+  }
+
+   /**
+   * Get relationships
+   * @return relationships
+  **/
+  @ApiModelProperty(value = "")
+  public ItemRelationships getRelationships() {
+    return relationships;
+  }
+
+  public void setRelationships(ItemRelationships relationships) {
+    this.relationships = relationships;
+  }
+
+  public Item productTypes(ItemProductTypes productTypes) {
+    this.productTypes = productTypes;
+    return this;
+  }
+
+   /**
+   * Get productTypes
+   * @return productTypes
+  **/
+  @ApiModelProperty(value = "")
+  public ItemProductTypes getProductTypes() {
+    return productTypes;
+  }
+
+  public void setProductTypes(ItemProductTypes productTypes) {
+    this.productTypes = productTypes;
   }
 
 
@@ -200,12 +253,14 @@ public class Item {
         Objects.equals(this.issues, item.issues) &&
         Objects.equals(this.offers, item.offers) &&
         Objects.equals(this.fulfillmentAvailability, item.fulfillmentAvailability) &&
-        Objects.equals(this.procurement, item.procurement);
+        Objects.equals(this.procurement, item.procurement) &&
+        Objects.equals(this.relationships, item.relationships) &&
+        Objects.equals(this.productTypes, item.productTypes);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(sku, summaries, attributes, issues, offers, fulfillmentAvailability, procurement);
+    return Objects.hash(sku, summaries, attributes, issues, offers, fulfillmentAvailability, procurement, relationships, productTypes);
   }
 
 
@@ -221,6 +276,8 @@ public class Item {
     sb.append("    offers: ").append(toIndentedString(offers)).append("\n");
     sb.append("    fulfillmentAvailability: ").append(toIndentedString(fulfillmentAvailability)).append("\n");
     sb.append("    procurement: ").append(toIndentedString(procurement)).append("\n");
+    sb.append("    relationships: ").append(toIndentedString(relationships)).append("\n");
+    sb.append("    productTypes: ").append(toIndentedString(productTypes)).append("\n");
     sb.append("}");
     return sb.toString();
   }

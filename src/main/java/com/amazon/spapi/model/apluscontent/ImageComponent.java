@@ -32,7 +32,7 @@ public class ImageComponent {
   private ImageCropSpecification imageCropSpecification = null;
 
   @SerializedName("altText")
-  private String altText = null;
+  private String altText = " ";
 
   public ImageComponent uploadDestinationId(String uploadDestinationId) {
     this.uploadDestinationId = uploadDestinationId;

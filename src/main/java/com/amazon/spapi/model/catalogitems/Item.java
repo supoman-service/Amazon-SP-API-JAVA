@@ -17,6 +17,7 @@ import com.google.gson.annotations.SerializedName;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
+import java.util.Map;
 import java.util.Objects;
 
 /**
@@ -29,7 +30,7 @@ public class Item {
   private String asin = null;
 
   @SerializedName("attributes")
-  private ItemAttributes attributes = null;
+  private Map attributes = null;
 
   @SerializedName("dimensions")
   private ItemDimensions dimensions = null;
@@ -73,7 +74,7 @@ public class Item {
     this.asin = asin;
   }
 
-  public Item attributes(ItemAttributes attributes) {
+  public Item attributes(Map attributes) {
     this.attributes = attributes;
     return this;
   }
@@ -83,11 +84,11 @@ public class Item {
    * @return attributes
   **/
   @ApiModelProperty(value = "")
-  public ItemAttributes getAttributes() {
+  public Map getAttributes() {
     return attributes;
   }
 
-  public void setAttributes(ItemAttributes attributes) {
+  public void setAttributes(Map attributes) {
     this.attributes = attributes;
   }
 

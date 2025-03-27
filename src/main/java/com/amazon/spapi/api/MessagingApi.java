@@ -1762,8 +1762,8 @@ public class MessagingApi {
     }
     /*
      * 初始化API授权参数
-     * @author supoman
-     * @date 2024/01/01
+     * @author Amte Ma
+     * @date 2021/5/26
      * @param authorConfigDTO
      * @return com.amazon.spapi.api.ReportsApi
      */

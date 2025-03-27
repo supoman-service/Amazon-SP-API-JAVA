@@ -27,7 +27,7 @@ import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
 
 /**
- * @author: supoman
+ * @author: ty
  * @description: 货件状态枚举类
  * @date: 2021/8/9
  */

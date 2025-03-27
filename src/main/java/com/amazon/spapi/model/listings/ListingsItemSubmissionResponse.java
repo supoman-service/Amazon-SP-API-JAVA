@@ -1,6 +1,6 @@
 /*
  * Selling Partner API for Listings Items
- * The Selling Partner API for Listings Items (Listings Items API) provides programmatic access to selling partner listings on Amazon. Use this API in collaboration with the Selling Partner API for Product Type Definitions, which you use to retrieve the information about Amazon product types needed to use the Listings Items API.  For more information, see the [Listings Items API Use Case Guide](doc:listings-items-api-v2021-08-01-use-case-guide).
+ * The Selling Partner API for Listings Items (Listings Items API) provides programmatic access to selling partner listings on Amazon. Use this API in collaboration with the Selling Partner API for Product Type Definitions, which you use to retrieve the information about Amazon product types needed to use the Listings Items API.  For more information, see the [Listings Items API Use Case Guide](https://developer-docs.amazon.com/sp-api/docs/listings-items-api-v2021-08-01-use-case-guide).
  *
  * OpenAPI spec version: 2021-08-01
  *
@@ -30,7 +30,7 @@ import java.util.Objects;
  * Response containing the results of a submission to the Selling Partner API for Listings Items.
  */
 @ApiModel(description = "Response containing the results of a submission to the Selling Partner API for Listings Items.")
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2023-05-12T16:19:42.940+08:00")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2024-12-19T17:08:06.914+08:00")
 public class ListingsItemSubmissionResponse {
   @SerializedName("sku")
   private String sku = null;
@@ -42,7 +42,9 @@ public class ListingsItemSubmissionResponse {
   public enum StatusEnum {
     ACCEPTED("ACCEPTED"),
 
-    INVALID("INVALID");
+    INVALID("INVALID"),
+
+    VALID("VALID");
 
     private String value;
 
@@ -90,6 +92,9 @@ public class ListingsItemSubmissionResponse {
 
   @SerializedName("issues")
   private List<Issue> issues = null;
+
+  @SerializedName("identifiers")
+  private ItemIdentifiers identifiers = null;
 
   public ListingsItemSubmissionResponse sku(String sku) {
     this.sku = sku;
@@ -171,6 +176,24 @@ public class ListingsItemSubmissionResponse {
     this.issues = issues;
   }
 
+  public ListingsItemSubmissionResponse identifiers(ItemIdentifiers identifiers) {
+    this.identifiers = identifiers;
+    return this;
+  }
+
+   /**
+   * Identity attributes associated with the item in the Amazon catalog, such as the ASIN.
+   * @return identifiers
+  **/
+  @ApiModelProperty(value = "Identity attributes associated with the item in the Amazon catalog, such as the ASIN.")
+  public ItemIdentifiers getIdentifiers() {
+    return identifiers;
+  }
+
+  public void setIdentifiers(ItemIdentifiers identifiers) {
+    this.identifiers = identifiers;
+  }
+
 
   @Override
   public boolean equals(Object o) {
@@ -184,12 +207,13 @@ public class ListingsItemSubmissionResponse {
     return Objects.equals(this.sku, listingsItemSubmissionResponse.sku) &&
         Objects.equals(this.status, listingsItemSubmissionResponse.status) &&
         Objects.equals(this.submissionId, listingsItemSubmissionResponse.submissionId) &&
-        Objects.equals(this.issues, listingsItemSubmissionResponse.issues);
+        Objects.equals(this.issues, listingsItemSubmissionResponse.issues) &&
+        Objects.equals(this.identifiers, listingsItemSubmissionResponse.identifiers);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(sku, status, submissionId, issues);
+    return Objects.hash(sku, status, submissionId, issues, identifiers);
   }
 
 
@@ -202,6 +226,7 @@ public class ListingsItemSubmissionResponse {
     sb.append("    status: ").append(toIndentedString(status)).append("\n");
     sb.append("    submissionId: ").append(toIndentedString(submissionId)).append("\n");
     sb.append("    issues: ").append(toIndentedString(issues)).append("\n");
+    sb.append("    identifiers: ").append(toIndentedString(identifiers)).append("\n");
     sb.append("}");
     return sb.toString();
   }

@@ -30,8 +30,8 @@ public class DownloadDocument {
 
     /*
      * 通过已创建的报告documentId Url下载报告内容
-     * @author supoman
-     * @date 2024/01/01
+     * @author Amte Ma
+     * @date 2021/5/26
      * @param key 报告解密密钥
      * @param initializationVector 偏移量
      * @param documentId Url
@@ -72,8 +72,8 @@ public class DownloadDocument {
      * @param compressionAlgorithm the compressionAlgorithm used for the document
      * @throws IOException              when there is an error reading the response
      * @throws IllegalArgumentException when the charset is missing
-     * @author supoman
-     * @date 2024/01/01
+     * @author Amte Ma
+     * @date 2021/5/26
      */
     public String download(String url, String compressionAlgorithm) throws IOException, IllegalArgumentException {
         Request request = new Request.Builder().url(url).get().build();

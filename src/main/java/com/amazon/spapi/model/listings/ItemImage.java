@@ -1,6 +1,6 @@
 /*
  * Selling Partner API for Listings Items
- * The Selling Partner API for Listings Items (Listings Items API) provides programmatic access to selling partner listings on Amazon. Use this API in collaboration with the Selling Partner API for Product Type Definitions, which you use to retrieve the information about Amazon product types needed to use the Listings Items API.  For more information, see the [Listings Items API Use Case Guide](doc:listings-items-api-v2021-08-01-use-case-guide).
+ * The Selling Partner API for Listings Items (Listings Items API) provides programmatic access to selling partner listings on Amazon. Use this API in collaboration with the Selling Partner API for Product Type Definitions, which you use to retrieve the information about Amazon product types needed to use the Listings Items API.  For more information, see the [Listings Items API Use Case Guide](https://developer-docs.amazon.com/sp-api/docs/listings-items-api-v2021-08-01-use-case-guide).
  *
  * OpenAPI spec version: 2021-08-01
  *
@@ -20,10 +20,10 @@ import io.swagger.annotations.ApiModelProperty;
 import java.util.Objects;
 
 /**
- * Image for the listings item.
+ * The image for the listings item.
  */
-@ApiModel(description = "Image for the listings item.")
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2023-05-12T16:19:42.940+08:00")
+@ApiModel(description = "The image for the listings item.")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2024-12-19T17:08:06.914+08:00")
 public class ItemImage {
   @SerializedName("link")
   private String link = null;
@@ -40,10 +40,10 @@ public class ItemImage {
   }
 
    /**
-   * Link, or URL, for the image.
+   * The link, or URL, to the image.
    * @return link
   **/
-  @ApiModelProperty(required = true, value = "Link, or URL, for the image.")
+  @ApiModelProperty(required = true, value = "The link, or URL, to the image.")
   public String getLink() {
     return link;
   }
@@ -58,10 +58,10 @@ public class ItemImage {
   }
 
    /**
-   * Height of the image in pixels.
+   * The height of the image in pixels.
    * @return height
   **/
-  @ApiModelProperty(required = true, value = "Height of the image in pixels.")
+  @ApiModelProperty(required = true, value = "The height of the image in pixels.")
   public Integer getHeight() {
     return height;
   }
@@ -76,10 +76,10 @@ public class ItemImage {
   }
 
    /**
-   * Width of the image in pixels.
+   * The width of the image in pixels.
    * @return width
   **/
-  @ApiModelProperty(required = true, value = "Width of the image in pixels.")
+  @ApiModelProperty(required = true, value = "The width of the image in pixels.")
   public Integer getWidth() {
     return width;
   }

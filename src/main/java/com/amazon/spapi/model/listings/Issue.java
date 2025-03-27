@@ -1,6 +1,6 @@
 /*
  * Selling Partner API for Listings Items
- * The Selling Partner API for Listings Items (Listings Items API) provides programmatic access to selling partner listings on Amazon. Use this API in collaboration with the Selling Partner API for Product Type Definitions, which you use to retrieve the information about Amazon product types needed to use the Listings Items API.  For more information, see the [Listings Items API Use Case Guide](doc:listings-items-api-v2021-08-01-use-case-guide).
+ * The Selling Partner API for Listings Items (Listings Items API) provides programmatic access to selling partner listings on Amazon. Use this API in collaboration with the Selling Partner API for Product Type Definitions, which you use to retrieve the information about Amazon product types needed to use the Listings Items API.  For more information, see the [Listings Items API Use Case Guide](https://developer-docs.amazon.com/sp-api/docs/listings-items-api-v2021-08-01-use-case-guide).
  *
  * OpenAPI spec version: 2021-08-01
  *
@@ -30,7 +30,7 @@ import java.util.Objects;
  * An issue with a listings item.
  */
 @ApiModel(description = "An issue with a listings item.")
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2023-05-12T16:19:42.940+08:00")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2024-12-19T17:08:06.914+08:00")
 public class Issue {
   @SerializedName("code")
   private String code = null;
@@ -92,6 +92,12 @@ public class Issue {
 
   @SerializedName("attributeNames")
   private List<String> attributeNames = null;
+
+  @SerializedName("categories")
+  private List<String> categories = new ArrayList<String>();
+
+  @SerializedName("enforcements")
+  private IssueEnforcements enforcements = null;
 
   public Issue code(String code) {
     this.code = code;
@@ -161,16 +167,57 @@ public class Issue {
   }
 
    /**
-   * Names of the attributes associated with the issue, if applicable.
+   * The names of the attributes associated with the issue, if applicable.
    * @return attributeNames
   **/
-  @ApiModelProperty(value = "Names of the attributes associated with the issue, if applicable.")
+  @ApiModelProperty(value = "The names of the attributes associated with the issue, if applicable.")
   public List<String> getAttributeNames() {
     return attributeNames;
   }
 
   public void setAttributeNames(List<String> attributeNames) {
     this.attributeNames = attributeNames;
+  }
+
+  public Issue categories(List<String> categories) {
+    this.categories = categories;
+    return this;
+  }
+
+  public Issue addCategoriesItem(String categoriesItem) {
+    this.categories.add(categoriesItem);
+    return this;
+  }
+
+   /**
+   * List of issue categories.   Possible vales:   * &#x60;INVALID_ATTRIBUTE&#x60; - Indicating an invalid attribute in the listing.   * &#x60;MISSING_ATTRIBUTE&#x60; - Highlighting a missing attribute in the listing.   * &#x60;INVALID_IMAGE&#x60; - Signifying an invalid image in the listing.   * &#x60;MISSING_IMAGE&#x60; - Noting the absence of an image in the listing.   * &#x60;INVALID_PRICE&#x60; - Pertaining to issues with the listing&#39;s price-related attributes.   * &#x60;MISSING_PRICE&#x60; - Pointing out the absence of a price attribute in the listing.   * &#x60;DUPLICATE&#x60; - Identifying listings with potential duplicate problems, such as this ASIN potentially being a duplicate of another ASIN.   * &#x60;QUALIFICATION_REQUIRED&#x60; - Indicating that the listing requires qualification-related approval.
+   * @return categories
+  **/
+  @ApiModelProperty(example = "[\"INVALID_ATTRIBUTE\"]", required = true, value = "List of issue categories.   Possible vales:   * `INVALID_ATTRIBUTE` - Indicating an invalid attribute in the listing.   * `MISSING_ATTRIBUTE` - Highlighting a missing attribute in the listing.   * `INVALID_IMAGE` - Signifying an invalid image in the listing.   * `MISSING_IMAGE` - Noting the absence of an image in the listing.   * `INVALID_PRICE` - Pertaining to issues with the listing's price-related attributes.   * `MISSING_PRICE` - Pointing out the absence of a price attribute in the listing.   * `DUPLICATE` - Identifying listings with potential duplicate problems, such as this ASIN potentially being a duplicate of another ASIN.   * `QUALIFICATION_REQUIRED` - Indicating that the listing requires qualification-related approval.")
+  public List<String> getCategories() {
+    return categories;
+  }
+
+  public void setCategories(List<String> categories) {
+    this.categories = categories;
+  }
+
+  public Issue enforcements(IssueEnforcements enforcements) {
+    this.enforcements = enforcements;
+    return this;
+  }
+
+   /**
+   * This field provides information about the enforcement actions taken by Amazon that affect the publishing or status of a listing. It also includes details about any associated exemptions.
+   * @return enforcements
+  **/
+  @ApiModelProperty(value = "This field provides information about the enforcement actions taken by Amazon that affect the publishing or status of a listing. It also includes details about any associated exemptions.")
+  public IssueEnforcements getEnforcements() {
+    return enforcements;
+  }
+
+  public void setEnforcements(IssueEnforcements enforcements) {
+    this.enforcements = enforcements;
   }
 
 
@@ -186,12 +233,14 @@ public class Issue {
     return Objects.equals(this.code, issue.code) &&
         Objects.equals(this.message, issue.message) &&
         Objects.equals(this.severity, issue.severity) &&
-        Objects.equals(this.attributeNames, issue.attributeNames);
+        Objects.equals(this.attributeNames, issue.attributeNames) &&
+        Objects.equals(this.categories, issue.categories) &&
+        Objects.equals(this.enforcements, issue.enforcements);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(code, message, severity, attributeNames);
+    return Objects.hash(code, message, severity, attributeNames, categories, enforcements);
   }
 
 
@@ -204,6 +253,8 @@ public class Issue {
     sb.append("    message: ").append(toIndentedString(message)).append("\n");
     sb.append("    severity: ").append(toIndentedString(severity)).append("\n");
     sb.append("    attributeNames: ").append(toIndentedString(attributeNames)).append("\n");
+    sb.append("    categories: ").append(toIndentedString(categories)).append("\n");
+    sb.append("    enforcements: ").append(toIndentedString(enforcements)).append("\n");
     sb.append("}");
     return sb.toString();
   }

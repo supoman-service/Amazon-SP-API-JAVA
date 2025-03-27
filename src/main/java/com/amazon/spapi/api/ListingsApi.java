@@ -12,15 +12,21 @@
 
 
 package com.amazon.spapi.api;
-import java.io.IOException;
+
 import com.amazon.spapi.SellingPartnerAPIAA.*;
 import com.amazon.spapi.client.*;
 import com.amazon.spapi.common.AwsAuthInfo;
 import com.amazon.spapi.config.AmazonAuthorConfig;
-import com.amazon.spapi.model.listings.*;
+import com.amazon.spapi.model.listings.ItemSearchResults;
+import com.amazon.spapi.model.listings.Item;
+import com.amazon.spapi.model.listings.ListingsItemPatchRequest;
+import com.amazon.spapi.model.listings.ListingsItemPutRequest;
+import com.amazon.spapi.model.listings.ListingsItemSubmissionResponse;
 import com.google.gson.reflect.TypeToken;
 import lombok.var;
+import org.threeten.bp.OffsetDateTime;
 
+import java.io.IOException;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -671,12 +677,252 @@ public class ListingsApi {
         apiClient.executeAsync(call, localVarReturnType, callback);
         return call;
     }
+    /**
+     * Build call for searchListingsItems
+     * @param sellerId A selling partner identifier, such as a merchant account or vendor code. (required)
+     * @param marketplaceIds A comma-delimited list of Amazon marketplace identifiers for the request. (required)
+     * @param issueLocale A locale that is used to localize issues. When not provided, the default language code of the first marketplace is used. Examples: \&quot;en_US\&quot;, \&quot;fr_CA\&quot;, \&quot;fr_FR\&quot;. When a localization is not available in the specified locale, localized messages default to \&quot;en_US\&quot;. (optional)
+     * @param includedData A comma-delimited list of datasets that you want to include in the response. Default: &#x60;summaries&#x60;. (optional, default to ["summaries"])
+     * @param identifiers A comma-delimited list of product identifiers that you can use to search for listings items.   **Note**:  1. This is required when you specify &#x60;identifiersType&#x60;. 2. You cannot use &#39;identifiers&#39; if you specify &#x60;variationParentSku&#x60; or &#x60;packageHierarchySku&#x60;. (optional)
+     * @param identifiersType A type of product identifiers that you can use to search for listings items.   **Note**:  This is required when &#x60;identifiers&#x60; is provided. (optional)
+     * @param variationParentSku Filters results to include listing items that are variation children of the specified SKU.   **Note**: You cannot use &#x60;variationParentSku&#x60; if you include &#x60;identifiers&#x60; or &#x60;packageHierarchySku&#x60; in your request. (optional)
+     * @param packageHierarchySku Filter results to include listing items that contain or are contained by the specified SKU.   **Note**: You cannot use &#x60;packageHierarchySku&#x60; if you include &#x60;identifiers&#x60; or &#x60;variationParentSku&#x60; in your request. (optional)
+     * @param createdAfter A date-time that is used to filter listing items. The response includes listings items that were created at or after this time. Values are in [ISO 8601](https://developer-docs.amazon.com/sp-api/docs/iso-8601) date-time format. (optional)
+     * @param createdBefore A date-time that is used to filter listing items. The response includes listings items that were created at or before this time. Values are in [ISO 8601](https://developer-docs.amazon.com/sp-api/docs/iso-8601) date-time format. (optional)
+     * @param lastUpdatedAfter A date-time that is used to filter listing items. The response includes listings items that were last updated at or after this time. Values are in [ISO 8601](https://developer-docs.amazon.com/sp-api/docs/iso-8601) date-time format. (optional)
+     * @param lastUpdatedBefore A date-time that is used to filter listing items. The response includes listings items that were last updated at or before this time. Values are in [ISO 8601](https://developer-docs.amazon.com/sp-api/docs/iso-8601) date-time format. (optional)
+     * @param withIssueSeverity Filter results to include only listing items that have issues that match one or more of the specified severity levels. (optional)
+     * @param withStatus Filter results to include only listing items that have the specified status. (optional)
+     * @param withoutStatus Filter results to include only listing items that don&#39;t contain the specified statuses. (optional)
+     * @param sortBy An attribute by which to sort the returned listing items. (optional, default to lastUpdatedDate)
+     * @param sortOrder The order in which to sort the result items. (optional, default to DESC)
+     * @param pageSize The number of results that you want to include on each page. (optional, default to 10)
+     * @param pageToken A token that you can use to fetch a specific page when there are multiple pages of results. (optional)
+     * @param progressListener Progress listener
+     * @param progressRequestListener Progress request listener
+     * @return Call to execute
+     * @throws ApiException If fail to serialize the request body object
+
+     */
+    public com.squareup.okhttp.Call searchListingsItemsCall(String sellerId, List<String> marketplaceIds, String issueLocale, List<String> includedData, List<String> identifiers, String identifiersType, String variationParentSku, String packageHierarchySku, OffsetDateTime createdAfter, OffsetDateTime createdBefore, OffsetDateTime lastUpdatedAfter, OffsetDateTime lastUpdatedBefore, List<String> withIssueSeverity, List<String> withStatus, List<String> withoutStatus, String sortBy, String sortOrder, Integer pageSize, String pageToken, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
+        Object localVarPostBody = null;
+
+        // create path and map variables
+        String localVarPath = "/listings/2021-08-01/items/{sellerId}"
+                .replaceAll("\\{" + "sellerId" + "\\}", apiClient.escapeString(sellerId.toString()));
+
+        List<Pair> localVarQueryParams = new ArrayList<Pair>();
+        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+        if (marketplaceIds != null)
+            localVarCollectionQueryParams.addAll(apiClient.parameterToPairs("csv", "marketplaceIds", marketplaceIds));
+        if (issueLocale != null)
+            localVarQueryParams.addAll(apiClient.parameterToPair("issueLocale", issueLocale));
+        if (includedData != null)
+            localVarCollectionQueryParams.addAll(apiClient.parameterToPairs("csv", "includedData", includedData));
+        if (identifiers != null)
+            localVarCollectionQueryParams.addAll(apiClient.parameterToPairs("csv", "identifiers", identifiers));
+        if (identifiersType != null)
+            localVarQueryParams.addAll(apiClient.parameterToPair("identifiersType", identifiersType));
+        if (variationParentSku != null)
+            localVarQueryParams.addAll(apiClient.parameterToPair("variationParentSku", variationParentSku));
+        if (packageHierarchySku != null)
+            localVarQueryParams.addAll(apiClient.parameterToPair("packageHierarchySku", packageHierarchySku));
+        if (createdAfter != null)
+            localVarQueryParams.addAll(apiClient.parameterToPair("createdAfter", createdAfter));
+        if (createdBefore != null)
+            localVarQueryParams.addAll(apiClient.parameterToPair("createdBefore", createdBefore));
+        if (lastUpdatedAfter != null)
+            localVarQueryParams.addAll(apiClient.parameterToPair("lastUpdatedAfter", lastUpdatedAfter));
+        if (lastUpdatedBefore != null)
+            localVarQueryParams.addAll(apiClient.parameterToPair("lastUpdatedBefore", lastUpdatedBefore));
+        if (withIssueSeverity != null)
+            localVarCollectionQueryParams.addAll(apiClient.parameterToPairs("csv", "withIssueSeverity", withIssueSeverity));
+        if (withStatus != null)
+            localVarCollectionQueryParams.addAll(apiClient.parameterToPairs("csv", "withStatus", withStatus));
+        if (withoutStatus != null)
+            localVarCollectionQueryParams.addAll(apiClient.parameterToPairs("csv", "withoutStatus", withoutStatus));
+        if (sortBy != null)
+            localVarQueryParams.addAll(apiClient.parameterToPair("sortBy", sortBy));
+        if (sortOrder != null)
+            localVarQueryParams.addAll(apiClient.parameterToPair("sortOrder", sortOrder));
+        if (pageSize != null)
+            localVarQueryParams.addAll(apiClient.parameterToPair("pageSize", pageSize));
+        if (pageToken != null)
+            localVarQueryParams.addAll(apiClient.parameterToPair("pageToken", pageToken));
+
+        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+
+        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+        final String[] localVarAccepts = {
+                "application/json"
+        };
+        final String localVarAccept = apiClient.selectHeaderAccept(localVarAccepts);
+        if (localVarAccept != null) localVarHeaderParams.put("Accept", localVarAccept);
+
+        final String[] localVarContentTypes = {
+                "application/json"
+        };
+        final String localVarContentType = apiClient.selectHeaderContentType(localVarContentTypes);
+        localVarHeaderParams.put("Content-Type", localVarContentType);
+
+        if(progressListener != null) {
+            apiClient.getHttpClient().networkInterceptors().add(new com.squareup.okhttp.Interceptor() {
+                @Override
+                public com.squareup.okhttp.Response intercept(com.squareup.okhttp.Interceptor.Chain chain) throws IOException {
+                    com.squareup.okhttp.Response originalResponse = chain.proceed(chain.request());
+                    return originalResponse.newBuilder()
+                            .body(new ProgressResponseBody(originalResponse.body(), progressListener))
+                            .build();
+                }
+            });
+        }
+
+        String[] localVarAuthNames = new String[] {  };
+        return apiClient.buildCall(localVarPath, "GET", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarAuthNames, progressRequestListener);
+    }
+
+    @SuppressWarnings("rawtypes")
+    private com.squareup.okhttp.Call searchListingsItemsValidateBeforeCall(String sellerId, List<String> marketplaceIds, String issueLocale, List<String> includedData, List<String> identifiers, String identifiersType, String variationParentSku, String packageHierarchySku, OffsetDateTime createdAfter, OffsetDateTime createdBefore, OffsetDateTime lastUpdatedAfter, OffsetDateTime lastUpdatedBefore, List<String> withIssueSeverity, List<String> withStatus, List<String> withoutStatus, String sortBy, String sortOrder, Integer pageSize, String pageToken, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
+
+        // verify the required parameter 'sellerId' is set
+        if (sellerId == null) {
+            throw new ApiException("Missing the required parameter 'sellerId' when calling searchListingsItems(Async)");
+        }
+
+        // verify the required parameter 'marketplaceIds' is set
+        if (marketplaceIds == null) {
+            throw new ApiException("Missing the required parameter 'marketplaceIds' when calling searchListingsItems(Async)");
+        }
+
+
+        com.squareup.okhttp.Call call = searchListingsItemsCall(sellerId, marketplaceIds, issueLocale, includedData, identifiers, identifiersType, variationParentSku, packageHierarchySku, createdAfter, createdBefore, lastUpdatedAfter, lastUpdatedBefore, withIssueSeverity, withStatus, withoutStatus, sortBy, sortOrder, pageSize, pageToken, progressListener, progressRequestListener);
+        return call;
+
+    }
+
+    /**
+     *
+     * Search for and return a list of selling partner listings items and their respective details.  **Usage Plan:**  | Rate (requests per second) | Burst | | ---- | ---- | | 5 | 5 |  The &#x60;x-amzn-RateLimit-Limit&#x60; response header returns the usage plan rate limits that are applied to the requested operation, when available. The preceding table contains the default rate and burst values for this operation. Selling partners whose business demands require higher throughput might have higher rate and burst values than those shown here. For more information, refer to [Usage Plans and Rate Limits](https://developer-docs.amazon.com/sp-api/docs/usage-plans-and-rate-limits-in-the-sp-api).
+     * @param sellerId A selling partner identifier, such as a merchant account or vendor code. (required)
+     * @param marketplaceIds A comma-delimited list of Amazon marketplace identifiers for the request. (required)
+     * @param issueLocale A locale that is used to localize issues. When not provided, the default language code of the first marketplace is used. Examples: \&quot;en_US\&quot;, \&quot;fr_CA\&quot;, \&quot;fr_FR\&quot;. When a localization is not available in the specified locale, localized messages default to \&quot;en_US\&quot;. (optional)
+     * @param includedData A comma-delimited list of datasets that you want to include in the response. Default: &#x60;summaries&#x60;. (optional, default to ["summaries"])
+     * @param identifiers A comma-delimited list of product identifiers that you can use to search for listings items.   **Note**:  1. This is required when you specify &#x60;identifiersType&#x60;. 2. You cannot use &#39;identifiers&#39; if you specify &#x60;variationParentSku&#x60; or &#x60;packageHierarchySku&#x60;. (optional)
+     * @param identifiersType A type of product identifiers that you can use to search for listings items.   **Note**:  This is required when &#x60;identifiers&#x60; is provided. (optional)
+     * @param variationParentSku Filters results to include listing items that are variation children of the specified SKU.   **Note**: You cannot use &#x60;variationParentSku&#x60; if you include &#x60;identifiers&#x60; or &#x60;packageHierarchySku&#x60; in your request. (optional)
+     * @param packageHierarchySku Filter results to include listing items that contain or are contained by the specified SKU.   **Note**: You cannot use &#x60;packageHierarchySku&#x60; if you include &#x60;identifiers&#x60; or &#x60;variationParentSku&#x60; in your request. (optional)
+     * @param createdAfter A date-time that is used to filter listing items. The response includes listings items that were created at or after this time. Values are in [ISO 8601](https://developer-docs.amazon.com/sp-api/docs/iso-8601) date-time format. (optional)
+     * @param createdBefore A date-time that is used to filter listing items. The response includes listings items that were created at or before this time. Values are in [ISO 8601](https://developer-docs.amazon.com/sp-api/docs/iso-8601) date-time format. (optional)
+     * @param lastUpdatedAfter A date-time that is used to filter listing items. The response includes listings items that were last updated at or after this time. Values are in [ISO 8601](https://developer-docs.amazon.com/sp-api/docs/iso-8601) date-time format. (optional)
+     * @param lastUpdatedBefore A date-time that is used to filter listing items. The response includes listings items that were last updated at or before this time. Values are in [ISO 8601](https://developer-docs.amazon.com/sp-api/docs/iso-8601) date-time format. (optional)
+     * @param withIssueSeverity Filter results to include only listing items that have issues that match one or more of the specified severity levels. (optional)
+     * @param withStatus Filter results to include only listing items that have the specified status. (optional)
+     * @param withoutStatus Filter results to include only listing items that don&#39;t contain the specified statuses. (optional)
+     * @param sortBy An attribute by which to sort the returned listing items. (optional, default to lastUpdatedDate)
+     * @param sortOrder The order in which to sort the result items. (optional, default to DESC)
+     * @param pageSize The number of results that you want to include on each page. (optional, default to 10)
+     * @param pageToken A token that you can use to fetch a specific page when there are multiple pages of results. (optional)
+     * @return ItemSearchResults
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+
+     */
+    public ItemSearchResults searchListingsItems(String sellerId, List<String> marketplaceIds, String issueLocale, List<String> includedData, List<String> identifiers, String identifiersType, String variationParentSku, String packageHierarchySku, OffsetDateTime createdAfter, OffsetDateTime createdBefore, OffsetDateTime lastUpdatedAfter, OffsetDateTime lastUpdatedBefore, List<String> withIssueSeverity, List<String> withStatus, List<String> withoutStatus, String sortBy, String sortOrder, Integer pageSize, String pageToken) throws ApiException {
+        ApiResponse<ItemSearchResults> resp = searchListingsItemsWithHttpInfo(sellerId, marketplaceIds, issueLocale, includedData, identifiers, identifiersType, variationParentSku, packageHierarchySku, createdAfter, createdBefore, lastUpdatedAfter, lastUpdatedBefore, withIssueSeverity, withStatus, withoutStatus, sortBy, sortOrder, pageSize, pageToken);
+        return resp.getData();
+    }
+
+    /**
+     *
+     * Search for and return a list of selling partner listings items and their respective details.  **Usage Plan:**  | Rate (requests per second) | Burst | | ---- | ---- | | 5 | 5 |  The &#x60;x-amzn-RateLimit-Limit&#x60; response header returns the usage plan rate limits that are applied to the requested operation, when available. The preceding table contains the default rate and burst values for this operation. Selling partners whose business demands require higher throughput might have higher rate and burst values than those shown here. For more information, refer to [Usage Plans and Rate Limits](https://developer-docs.amazon.com/sp-api/docs/usage-plans-and-rate-limits-in-the-sp-api).
+     * @param sellerId A selling partner identifier, such as a merchant account or vendor code. (required)
+     * @param marketplaceIds A comma-delimited list of Amazon marketplace identifiers for the request. (required)
+     * @param issueLocale A locale that is used to localize issues. When not provided, the default language code of the first marketplace is used. Examples: \&quot;en_US\&quot;, \&quot;fr_CA\&quot;, \&quot;fr_FR\&quot;. When a localization is not available in the specified locale, localized messages default to \&quot;en_US\&quot;. (optional)
+     * @param includedData A comma-delimited list of datasets that you want to include in the response. Default: &#x60;summaries&#x60;. (optional, default to ["summaries"])
+     * @param identifiers A comma-delimited list of product identifiers that you can use to search for listings items.   **Note**:  1. This is required when you specify &#x60;identifiersType&#x60;. 2. You cannot use &#39;identifiers&#39; if you specify &#x60;variationParentSku&#x60; or &#x60;packageHierarchySku&#x60;. (optional)
+     * @param identifiersType A type of product identifiers that you can use to search for listings items.   **Note**:  This is required when &#x60;identifiers&#x60; is provided. (optional)
+     * @param variationParentSku Filters results to include listing items that are variation children of the specified SKU.   **Note**: You cannot use &#x60;variationParentSku&#x60; if you include &#x60;identifiers&#x60; or &#x60;packageHierarchySku&#x60; in your request. (optional)
+     * @param packageHierarchySku Filter results to include listing items that contain or are contained by the specified SKU.   **Note**: You cannot use &#x60;packageHierarchySku&#x60; if you include &#x60;identifiers&#x60; or &#x60;variationParentSku&#x60; in your request. (optional)
+     * @param createdAfter A date-time that is used to filter listing items. The response includes listings items that were created at or after this time. Values are in [ISO 8601](https://developer-docs.amazon.com/sp-api/docs/iso-8601) date-time format. (optional)
+     * @param createdBefore A date-time that is used to filter listing items. The response includes listings items that were created at or before this time. Values are in [ISO 8601](https://developer-docs.amazon.com/sp-api/docs/iso-8601) date-time format. (optional)
+     * @param lastUpdatedAfter A date-time that is used to filter listing items. The response includes listings items that were last updated at or after this time. Values are in [ISO 8601](https://developer-docs.amazon.com/sp-api/docs/iso-8601) date-time format. (optional)
+     * @param lastUpdatedBefore A date-time that is used to filter listing items. The response includes listings items that were last updated at or before this time. Values are in [ISO 8601](https://developer-docs.amazon.com/sp-api/docs/iso-8601) date-time format. (optional)
+     * @param withIssueSeverity Filter results to include only listing items that have issues that match one or more of the specified severity levels. (optional)
+     * @param withStatus Filter results to include only listing items that have the specified status. (optional)
+     * @param withoutStatus Filter results to include only listing items that don&#39;t contain the specified statuses. (optional)
+     * @param sortBy An attribute by which to sort the returned listing items. (optional, default to lastUpdatedDate)
+     * @param sortOrder The order in which to sort the result items. (optional, default to DESC)
+     * @param pageSize The number of results that you want to include on each page. (optional, default to 10)
+     * @param pageToken A token that you can use to fetch a specific page when there are multiple pages of results. (optional)
+     * @return ApiResponse&lt;ItemSearchResults&gt;
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+
+     */
+    public ApiResponse<ItemSearchResults> searchListingsItemsWithHttpInfo(String sellerId, List<String> marketplaceIds, String issueLocale, List<String> includedData, List<String> identifiers, String identifiersType, String variationParentSku, String packageHierarchySku, OffsetDateTime createdAfter, OffsetDateTime createdBefore, OffsetDateTime lastUpdatedAfter, OffsetDateTime lastUpdatedBefore, List<String> withIssueSeverity, List<String> withStatus, List<String> withoutStatus, String sortBy, String sortOrder, Integer pageSize, String pageToken) throws ApiException {
+        com.squareup.okhttp.Call call = searchListingsItemsValidateBeforeCall(sellerId, marketplaceIds, issueLocale, includedData, identifiers, identifiersType, variationParentSku, packageHierarchySku, createdAfter, createdBefore, lastUpdatedAfter, lastUpdatedBefore, withIssueSeverity, withStatus, withoutStatus, sortBy, sortOrder, pageSize, pageToken, null, null);
+        Type localVarReturnType = new TypeToken<ItemSearchResults>(){}.getType();
+        return apiClient.execute(call, localVarReturnType);
+    }
+
+    /**
+     *  (asynchronously)
+     * Search for and return a list of selling partner listings items and their respective details.  **Usage Plan:**  | Rate (requests per second) | Burst | | ---- | ---- | | 5 | 5 |  The &#x60;x-amzn-RateLimit-Limit&#x60; response header returns the usage plan rate limits that are applied to the requested operation, when available. The preceding table contains the default rate and burst values for this operation. Selling partners whose business demands require higher throughput might have higher rate and burst values than those shown here. For more information, refer to [Usage Plans and Rate Limits](https://developer-docs.amazon.com/sp-api/docs/usage-plans-and-rate-limits-in-the-sp-api).
+     * @param sellerId A selling partner identifier, such as a merchant account or vendor code. (required)
+     * @param marketplaceIds A comma-delimited list of Amazon marketplace identifiers for the request. (required)
+     * @param issueLocale A locale that is used to localize issues. When not provided, the default language code of the first marketplace is used. Examples: \&quot;en_US\&quot;, \&quot;fr_CA\&quot;, \&quot;fr_FR\&quot;. When a localization is not available in the specified locale, localized messages default to \&quot;en_US\&quot;. (optional)
+     * @param includedData A comma-delimited list of datasets that you want to include in the response. Default: &#x60;summaries&#x60;. (optional, default to ["summaries"])
+     * @param identifiers A comma-delimited list of product identifiers that you can use to search for listings items.   **Note**:  1. This is required when you specify &#x60;identifiersType&#x60;. 2. You cannot use &#39;identifiers&#39; if you specify &#x60;variationParentSku&#x60; or &#x60;packageHierarchySku&#x60;. (optional)
+     * @param identifiersType A type of product identifiers that you can use to search for listings items.   **Note**:  This is required when &#x60;identifiers&#x60; is provided. (optional)
+     * @param variationParentSku Filters results to include listing items that are variation children of the specified SKU.   **Note**: You cannot use &#x60;variationParentSku&#x60; if you include &#x60;identifiers&#x60; or &#x60;packageHierarchySku&#x60; in your request. (optional)
+     * @param packageHierarchySku Filter results to include listing items that contain or are contained by the specified SKU.   **Note**: You cannot use &#x60;packageHierarchySku&#x60; if you include &#x60;identifiers&#x60; or &#x60;variationParentSku&#x60; in your request. (optional)
+     * @param createdAfter A date-time that is used to filter listing items. The response includes listings items that were created at or after this time. Values are in [ISO 8601](https://developer-docs.amazon.com/sp-api/docs/iso-8601) date-time format. (optional)
+     * @param createdBefore A date-time that is used to filter listing items. The response includes listings items that were created at or before this time. Values are in [ISO 8601](https://developer-docs.amazon.com/sp-api/docs/iso-8601) date-time format. (optional)
+     * @param lastUpdatedAfter A date-time that is used to filter listing items. The response includes listings items that were last updated at or after this time. Values are in [ISO 8601](https://developer-docs.amazon.com/sp-api/docs/iso-8601) date-time format. (optional)
+     * @param lastUpdatedBefore A date-time that is used to filter listing items. The response includes listings items that were last updated at or before this time. Values are in [ISO 8601](https://developer-docs.amazon.com/sp-api/docs/iso-8601) date-time format. (optional)
+     * @param withIssueSeverity Filter results to include only listing items that have issues that match one or more of the specified severity levels. (optional)
+     * @param withStatus Filter results to include only listing items that have the specified status. (optional)
+     * @param withoutStatus Filter results to include only listing items that don&#39;t contain the specified statuses. (optional)
+     * @param sortBy An attribute by which to sort the returned listing items. (optional, default to lastUpdatedDate)
+     * @param sortOrder The order in which to sort the result items. (optional, default to DESC)
+     * @param pageSize The number of results that you want to include on each page. (optional, default to 10)
+     * @param pageToken A token that you can use to fetch a specific page when there are multiple pages of results. (optional)
+     * @param callback The callback to be executed when the API call finishes
+     * @return The request call
+     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+
+     */
+    public com.squareup.okhttp.Call searchListingsItemsAsync(String sellerId, List<String> marketplaceIds, String issueLocale, List<String> includedData, List<String> identifiers, String identifiersType, String variationParentSku, String packageHierarchySku, OffsetDateTime createdAfter, OffsetDateTime createdBefore, OffsetDateTime lastUpdatedAfter, OffsetDateTime lastUpdatedBefore, List<String> withIssueSeverity, List<String> withStatus, List<String> withoutStatus, String sortBy, String sortOrder, Integer pageSize, String pageToken, final ApiCallback<ItemSearchResults> callback) throws ApiException {
+
+        ProgressResponseBody.ProgressListener progressListener = null;
+        ProgressRequestBody.ProgressRequestListener progressRequestListener = null;
+
+        if (callback != null) {
+            progressListener = new ProgressResponseBody.ProgressListener() {
+                @Override
+                public void update(long bytesRead, long contentLength, boolean done) {
+                    callback.onDownloadProgress(bytesRead, contentLength, done);
+                }
+            };
+
+            progressRequestListener = new ProgressRequestBody.ProgressRequestListener() {
+                @Override
+                public void onRequestProgress(long bytesWritten, long contentLength, boolean done) {
+                    callback.onUploadProgress(bytesWritten, contentLength, done);
+                }
+            };
+        }
+
+        com.squareup.okhttp.Call call = searchListingsItemsValidateBeforeCall(sellerId, marketplaceIds, issueLocale, includedData, identifiers, identifiersType, variationParentSku, packageHierarchySku, createdAfter, createdBefore, lastUpdatedAfter, lastUpdatedBefore, withIssueSeverity, withStatus, withoutStatus, sortBy, sortOrder, pageSize, pageToken, progressListener, progressRequestListener);
+        Type localVarReturnType = new TypeToken<ItemSearchResults>(){}.getType();
+        apiClient.executeAsync(call, localVarReturnType, callback);
+        return call;
+    }
     public static ListingsApi amazonAuthorizationApi(AmazonAuthorConfig authorConfigDTO) {
         var authInfo=new AwsAuthInfo(authorConfigDTO);
         ListingsApi api =new ListingsApi.Builder()
-                
+
                 .lwaAuthorizationCredentials(authInfo.getLwaAuthorizationCredentials())
-                
+
                 .endpoint(authorConfigDTO.getSpEndPoint())
                 .build();
 
@@ -687,15 +933,15 @@ public class ListingsApi {
         return api;
     }
     public static class Builder {
-       
+
         private LWAAuthorizationCredentials lwaAuthorizationCredentials;
         private String endpoint;
         private LWAAccessTokenCache lwaAccessTokenCache;
         private Boolean disableAccessTokenCache = false;
-       
+
         private RateLimitConfiguration rateLimitConfiguration;
 
-       
+
 
         public Builder lwaAuthorizationCredentials(LWAAuthorizationCredentials lwaAuthorizationCredentials) {
             this.lwaAuthorizationCredentials = lwaAuthorizationCredentials;
@@ -717,7 +963,7 @@ public class ListingsApi {
             return this;
         }
 
-        
+
 
         public Builder rateLimitConfigurationOnRequests(RateLimitConfiguration rateLimitConfiguration){
             this.rateLimitConfiguration = rateLimitConfiguration;
@@ -731,7 +977,7 @@ public class ListingsApi {
 
 
         public ListingsApi build() {
-            
+
 
             if (lwaAuthorizationCredentials == null) {
                 throw new RuntimeException("LWAAuthorizationCredentials not set");
@@ -741,7 +987,7 @@ public class ListingsApi {
                 throw new RuntimeException("Endpoint not set");
             }
 
-            
+
 
             LWAAuthorizationSigner lwaAuthorizationSigner = null;
             if (disableAccessTokenCache) {
@@ -755,7 +1001,7 @@ public class ListingsApi {
             }
 
             return new ListingsApi(new ApiClient()
-                    
+
                     .setLWAAuthorizationSigner(lwaAuthorizationSigner)
                     .setBasePath(endpoint)
                     .setRateLimiter(rateLimitConfiguration));

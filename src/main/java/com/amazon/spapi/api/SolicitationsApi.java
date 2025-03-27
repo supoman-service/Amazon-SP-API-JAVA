@@ -322,8 +322,8 @@ public class SolicitationsApi {
     }
     /*
      * 初始化授权
-     * @author supoman
-     * @date 2024/01/01
+     * @author Amte Ma
+     * @date 2021/5/26
      * @param authorConfigDTO
      * @return com.amazon.spapi.api.ReportsApi
      */

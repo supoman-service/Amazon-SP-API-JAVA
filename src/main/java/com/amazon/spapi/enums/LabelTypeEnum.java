@@ -9,7 +9,7 @@ import com.google.gson.stream.JsonWriter;
 import java.io.IOException;
 
 /**
- * @author: supoman
+ * @author: ty
  * @description: LabelType枚举类
  * @date: 2021/8/11
  */

@@ -9,9 +9,9 @@ import lombok.Getter;
 import java.io.IOException;
 
 /**
- * @author: supoman
+ * @author: ty
  * @description: 报告类型枚举类,仅供测试调试用
- * @date: 2024/01/29
+ * @date: 2021/8/23
  */
 @JsonAdapter(ReportTypeEnum.Adapter.class)
 public enum ReportTypeEnum {
@@ -105,7 +105,8 @@ public enum ReportTypeEnum {
     GET_V2_SETTLEMENT_REPORT_DATA_XML("GET_V2_SETTLEMENT_REPORT_DATA_XML"),
     GET_FLAT_FILE_SALES_TAX_DATA("GET_FLAT_FILE_SALES_TAX_DATA"),
     RFQD_BULK_DOWNLOAD("RFQD_BULK_DOWNLOAD"),
-    FEE_DISCOUNTS_REPORT("FEE_DISCOUNTS_REPORT")
+    FEE_DISCOUNTS_REPORT("FEE_DISCOUNTS_REPORT"),
+    GET_AMAZON_FULFILLED_SHIPMENTS_DATA_INVOICING("GET_AMAZON_FULFILLED_SHIPMENTS_DATA_INVOICING")
     ;
     /**
      * 报告类型

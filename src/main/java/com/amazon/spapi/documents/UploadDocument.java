@@ -12,7 +12,7 @@ import com.amazon.spapi.documents.impl.AESCryptoStreamFactory;
 import com.squareup.okhttp.*;
 
 /**
- * @author:supoman
+ * @author:Amte Ma
  * @description:FeedsApi操作上传下载
  * @date:2021/6/15
  */

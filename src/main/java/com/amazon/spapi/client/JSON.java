@@ -13,14 +13,14 @@
 
 package com.amazon.spapi.client;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import com.google.gson.JsonParseException;
-import com.google.gson.TypeAdapter;
+import cn.hutool.json.JSONConfig;
+import cn.hutool.json.JSONObject;
+import cn.hutool.json.JSONUtil;
+import com.google.gson.*;
 import com.google.gson.internal.bind.util.ISO8601Utils;
 import com.google.gson.stream.JsonReader;
+import com.google.gson.stream.JsonToken;
 import com.google.gson.stream.JsonWriter;
-import com.google.gson.JsonElement;
 import io.gsonfire.GsonFireBuilder;
 import io.gsonfire.TypeSelector;
 import org.threeten.bp.LocalDate;
@@ -42,11 +42,11 @@ import java.util.HashMap;
 public class JSON {
     private Gson gson;
     private boolean isLenientOnJson = false;
-    private DateTypeAdapter dateTypeAdapter = new DateTypeAdapter();
-    private SqlDateTypeAdapter sqlDateTypeAdapter = new SqlDateTypeAdapter();
-    private OffsetDateTimeTypeAdapter offsetDateTimeTypeAdapter = new OffsetDateTimeTypeAdapter();
-    private LocalDateTypeAdapter localDateTypeAdapter = new LocalDateTypeAdapter();
-    private ByteArrayAdapter byteArrayAdapter = new ByteArrayAdapter();
+    private  DateTypeAdapter dateTypeAdapter = new DateTypeAdapter();
+    private  SqlDateTypeAdapter sqlDateTypeAdapter = new SqlDateTypeAdapter();
+    private  OffsetDateTimeTypeAdapter offsetDateTimeTypeAdapter = new OffsetDateTimeTypeAdapter();
+    private  LocalDateTypeAdapter localDateTypeAdapter = new LocalDateTypeAdapter();
+    private  ByteArrayAdapter byteArrayAdapter = new ByteArrayAdapter();
 
     public static GsonBuilder createGson() {
         GsonFireBuilder fireBuilder = new GsonFireBuilder()
@@ -71,7 +71,7 @@ public class JSON {
         return clazz;
     }
 
-    public JSON() {
+    public  JSON() {
         gson = createGson()
             .registerTypeAdapter(Date.class, dateTypeAdapter)
             .registerTypeAdapter(java.sql.Date.class, sqlDateTypeAdapter)
@@ -133,6 +133,19 @@ public class JSON {
                 jsonReader.setLenient(true);
                 return gson.fromJson(jsonReader, returnType);
             } else {
+
+                // 解析 JSON 字符串为 JSONObject
+//                JsonParser js = new JsonParser();
+//                JsonElement rootElement = js.parse(body);
+//                // 递归处理 JSON 元素
+//                processJsonElement(rootElement);
+//                // 将处理后的 JsonElement 转换回 JSON 字符串
+//                String newJsonStr = rootElement.toString();
+
+                // 将处理后的 JSONObject 转换回 JSON 字符
+                if (! StringUtil.isEmpty(body)) {
+                    body = body.replaceAll("\"false\"","false").replaceAll("\"true\"","true");
+                }
                 return gson.fromJson(body, returnType);
             }
         } catch (JsonParseException e) {
@@ -388,6 +401,34 @@ public class JSON {
     public JSON setSqlDateFormat(DateFormat dateFormat) {
         sqlDateTypeAdapter.setFormat(dateFormat);
         return this;
+    }
+
+    private static void processJsonElement(JsonElement element) {
+        if (element.isJsonObject()) {
+            JsonObject jsonObject = element.getAsJsonObject();
+            for (String key : jsonObject.keySet()) {
+                JsonElement childElement = jsonObject.get(key);
+                if (childElement.isJsonPrimitive() && childElement.getAsJsonPrimitive().isString() ) {
+                    if ("false".equals(childElement.getAsString())) {
+                        // 将字符串 "false" 替换为布尔类型的 false
+                        jsonObject.addProperty(key, false);
+                    }else if ("true".equals(childElement.getAsString())) {
+                        // 将字符串 "false" 替换为布尔类型的 false
+                        jsonObject.addProperty(key, true);
+                    }
+
+                } else {
+                    // 递归处理子元素
+                    processJsonElement(childElement);
+                }
+            }
+        } else if (element.isJsonArray()) {
+            JsonArray jsonArray = element.getAsJsonArray();
+            for (int i = 0; i < jsonArray.size(); i++) {
+                JsonElement arrayElement = jsonArray.get(i);
+                processJsonElement(arrayElement);
+            }
+        }
     }
 
 }

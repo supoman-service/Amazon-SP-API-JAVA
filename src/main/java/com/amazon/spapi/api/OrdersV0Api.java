@@ -1162,9 +1162,9 @@ public class OrdersV0Api {
         AmazonAuthorConfig authorConfigDTO=new AmazonAuthorConfig(refreshToken,region,spEndPoint);
         var authInfo=new AwsAuthInfo(authorConfigDTO);
         OrdersV0Api api =new Builder()
-
+                
                 .lwaAuthorizationCredentials(authInfo.getLwaAuthorizationCredentials())
-
+                
                 .endpoint(authorConfigDTO.getSpEndPoint())
                 //.lwaAuthorizationSigner.
                 .build();
@@ -1177,32 +1177,16 @@ public class OrdersV0Api {
         }
         return api;
     }
-    //授权模式
-    public static OrdersV0Api amazonAuthorizationApi(AmazonAuthorConfig authorConfigDTO) {
-        var authInfo=new AwsAuthInfo(authorConfigDTO);
-        OrdersV0Api api =new OrdersV0Api.Builder()
-
-                .lwaAuthorizationCredentials(authInfo.getLwaAuthorizationCredentials())
-
-                .endpoint(authorConfigDTO.getSpEndPoint())
-                .build();
-
-        //授权失败，未获取到API实例的话抛出异常，进行重试
-        if(null == api) {
-            throw new RuntimeException("授权失败，未获取到API实例，请重试");
-        }
-        return api;
-    }
     public static class Builder {
-
+       
         private LWAAuthorizationCredentials lwaAuthorizationCredentials;
         private String endpoint;
         private LWAAccessTokenCache lwaAccessTokenCache;
         private Boolean disableAccessTokenCache = false;
-
+       
         private RateLimitConfiguration rateLimitConfiguration;
 
-
+       
 
         public Builder lwaAuthorizationCredentials(LWAAuthorizationCredentials lwaAuthorizationCredentials) {
             this.lwaAuthorizationCredentials = lwaAuthorizationCredentials;
@@ -1224,7 +1208,7 @@ public class OrdersV0Api {
             return this;
         }
 
-
+        
 
         public Builder rateLimitConfigurationOnRequests(RateLimitConfiguration rateLimitConfiguration){
             this.rateLimitConfiguration = rateLimitConfiguration;
@@ -1238,7 +1222,7 @@ public class OrdersV0Api {
 
 
         public OrdersV0Api build() {
-
+            
 
             if (lwaAuthorizationCredentials == null) {
                 throw new RuntimeException("LWAAuthorizationCredentials not set");
@@ -1248,7 +1232,7 @@ public class OrdersV0Api {
                 throw new RuntimeException("Endpoint not set");
             }
 
-
+            
 
             LWAAuthorizationSigner lwaAuthorizationSigner = null;
             if (disableAccessTokenCache) {
@@ -1262,7 +1246,7 @@ public class OrdersV0Api {
             }
 
             return new OrdersV0Api(new ApiClient()
-
+                    
                     .setLWAAuthorizationSigner(lwaAuthorizationSigner)
                     .setBasePath(endpoint)
                     .setRateLimiter(rateLimitConfiguration));

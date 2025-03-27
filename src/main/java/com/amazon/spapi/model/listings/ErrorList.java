@@ -1,6 +1,6 @@
 /*
  * Selling Partner API for Listings Items
- * The Selling Partner API for Listings Items (Listings Items API) provides programmatic access to selling partner listings on Amazon. Use this API in collaboration with the Selling Partner API for Product Type Definitions, which you use to retrieve the information about Amazon product types needed to use the Listings Items API.  For more information, see the [Listings Items API Use Case Guide](doc:listings-items-api-v2021-08-01-use-case-guide).
+ * The Selling Partner API for Listings Items (Listings Items API) provides programmatic access to selling partner listings on Amazon. Use this API in collaboration with the Selling Partner API for Product Type Definitions, which you use to retrieve the information about Amazon product types needed to use the Listings Items API.  For more information, see the [Listings Items API Use Case Guide](https://developer-docs.amazon.com/sp-api/docs/listings-items-api-v2021-08-01-use-case-guide).
  *
  * OpenAPI spec version: 2021-08-01
  *
@@ -16,6 +16,7 @@ package com.amazon.spapi.model.listings;
 import com.google.gson.annotations.SerializedName;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+import com.amazon.spapi.model.listings.Error;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,17 +26,17 @@ import java.util.Objects;
  * A list of error responses returned when a request is unsuccessful.
  */
 @ApiModel(description = "A list of error responses returned when a request is unsuccessful.")
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2023-05-12T16:19:42.940+08:00")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2024-12-19T17:08:06.914+08:00")
 public class ErrorList {
   @SerializedName("errors")
-  private List<java.lang.Error> errors = new ArrayList<java.lang.Error>();
+  private List<Error> errors = new ArrayList<Error>();
 
-  public ErrorList errors(List<java.lang.Error> errors) {
+  public ErrorList errors(List<Error> errors) {
     this.errors = errors;
     return this;
   }
 
-  public ErrorList addErrorsItem(java.lang.Error errorsItem) {
+  public ErrorList addErrorsItem(Error errorsItem) {
     this.errors.add(errorsItem);
     return this;
   }
@@ -45,11 +46,11 @@ public class ErrorList {
    * @return errors
   **/
   @ApiModelProperty(required = true, value = "")
-  public List<java.lang.Error> getErrors() {
+  public List<Error> getErrors() {
     return errors;
   }
 
-  public void setErrors(List<java.lang.Error> errors) {
+  public void setErrors(List<Error> errors) {
     this.errors = errors;
   }
 
